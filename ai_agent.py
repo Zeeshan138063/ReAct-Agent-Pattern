@@ -1,4 +1,6 @@
 from main import client
+
+
 class Agent:
     def __init__(self, system):
         self.system = system
@@ -6,20 +8,16 @@ class Agent:
         if self.system:
             self.messages.append({"role": "system", "content": self.system})
 
-
     def __call__(self, message):
-        self.messages.append({"role": "user", "content":message})
+        self.messages.append({"role": "user", "content": message})
         result = self.execute()
         self.messages.append({"role": "assistant", "content": result})
         return result
 
     def execute(self):
-        completion = client.chat.completions.create(
-            model="gpt-4-0125-preview",
-            temperature=0,
-            messages=self.messages
-        )
+        completion = client.chat.completions.create(model="gpt-4-0125-preview", temperature=0, messages=self.messages)
         return completion.choices[0].message.content
+
 
 prompt = """
     You run in a loop of Thought, Action, PAUSE, Observation.
@@ -53,25 +51,30 @@ prompt = """
 
     Answer: A bulldog weights 51 lbs
     """.strip()
+
+
 def calculate(what):
     return eval(what)
 
 def average_dog_weight(name):
-    if name in "Scottish Terrier":
-        return("Scottish Terriers average 20 lbs")
-    elif name in "Border Collie":
-        return("a Border Collies average weight is 37 lbs")
-    elif name in "Toy Poodle":
-        return("a toy poodles average weight is 7 lbs")
+    if "Scottish Terrier" in name:
+        return "Scottish Terriers average 20 lbs"
+    elif "Border Collie" in name:
+        return "a Border Collies average weight is 37 lbs"
+    elif "Toy Poodle" in name:
+        return "a toy poodles average weight is 7 lbs"
     else:
-        return("An average dog weights 50 lbs")
+        return "An average dog weights 50 lbs"
 
-known_actions = {
-    "calculate": calculate,
-    "average_dog_weight": average_dog_weight
-}
+
+known_actions = {"calculate": calculate, "average_dog_weight": average_dog_weight}
 
 if __name__ == '__main__':
     abot = Agent(prompt)
     result = abot("How much does a toy poodle weigh?")
+    print(result)
+    result = average_dog_weight(" Toy Poodle")
+    print(result)
+    next_prompt = f"Observation: {result}"
+    result = abot(next_prompt)
     print(result)
