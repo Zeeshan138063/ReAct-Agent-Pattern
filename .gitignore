@@ -1,0 +1,66 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Environment variables
+.env
+.env.*
+
+# Virtual environments
+venv/
+.venv/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# Logs and debug files
+*.log
+*.out
+*.err
+logs/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Database files
+*.sqlite3
+
+# Python development tools
+migrations/
+*.egg-info/
+.eggs/
+*.coverage
+.coverage.*
+
+# Test reports
+coverage.xml
+nosetests.xml
+test-reports/
+
+# IDE and editor settings
+.vscode/
+.idea/
+
+# OpenAI API-related files
+openai_cache/
+openai_debug.log
+
+# Docker related
+docker-compose.override.yml
+
+# Build artifacts
+build/
+dist/
+*.egg
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+*.swo
+*~
